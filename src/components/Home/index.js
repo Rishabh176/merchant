@@ -79,7 +79,7 @@ const Home = memo(() => {
                                     let maxBid = bids.length > 0 ? Math.max.apply(Math, bids.map(function(o) { return o.amount; })) : 0
                                     let minBid = bids.length > 0 ? Math.min.apply(Math, bids.map(function(o) { return o.amount; })) : 0
                                     return(
-                                        <TableRow key={ele.id} onClick={() => {history.push(`/merchant/${ele.id}`)}}>
+                                        <TableRow key={ele.id} onClick={() => {history.push(`/merchant/${ele.id}`)}} className={classes.row}>
                                             <TableCell>
                                                 <Box className={classes.nameCell}>
                                                     <Avatar variant="circle" src={ele.avatarUrl} className={classes.avatar} />

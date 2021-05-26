@@ -21,6 +21,9 @@ export const useStyles = makeStyles(() =>
     },
     name: {
       marginTop: "8px",
+    },
+    row:{
+      cursor: "pointer",
     }
   }),
 );
