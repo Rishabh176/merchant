@@ -5,11 +5,12 @@ import { Box, Paper, Table, TableHead, TableBody, TableCell, TableRow, Typograph
 import { ToggleOff, ToggleOn } from '@material-ui/icons';
 import { BASE_URL } from '../../utils/constant';
 import Loader from '../../features/Loader';
-// import { useStyles } from "./styles";
+import { useStyles } from "./styles";
 
 const Home = memo(() => {
 
     const history = useHistory();
+    const classes = useStyles();
 
     /**  useState hooks */
     const [loading, setLoading] = useState(true);
@@ -51,10 +52,10 @@ const Home = memo(() => {
     }
     else {
         return (
-            <Box>
+            <Box className={classes.container}>
                 <Box mb={5} mt={3}>
-                    <Typography>{toggle ? "Max Bid" : "Min Bid" }</Typography>
-                    <IconButton onClick={() => setToggle(!toggle)}>
+                    <Typography variant="h5">{toggle ? "Max Bid" : "Min Bid" }</Typography>
+                    <IconButton onClick={() => setToggle(!toggle)} className={classes.toggleButton}>
                         {
                             toggle ? <ToggleOn /> : <ToggleOff />
                         }
@@ -64,11 +65,11 @@ const Home = memo(() => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>Phone</TableCell>
-                                <TableCell>Premium</TableCell>
-                                <TableCell>Bid</TableCell>
+                                <TableCell className={classes.rowTitle}>Name</TableCell>
+                                <TableCell className={classes.rowTitle}>Email</TableCell>
+                                <TableCell className={classes.rowTitle}>Phone</TableCell>
+                                <TableCell className={classes.rowTitle}>Premium</TableCell>
+                                <TableCell className={classes.rowTitle}>Bid</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -80,9 +81,9 @@ const Home = memo(() => {
                                     return(
                                         <TableRow key={ele.id} onClick={() => {history.push(`/merchant/${ele.id}`)}}>
                                             <TableCell>
-                                                <Box display="flex" flexDirection="row" justifyContent="space-between">
-                                                    <Avatar variant="circle" src={ele.avatarUrl} />
-                                                    <Typography>{ele.firstname + ' ' + ele.lastname}</Typography>
+                                                <Box className={classes.nameCell}>
+                                                    <Avatar variant="circle" src={ele.avatarUrl} className={classes.avatar} />
+                                                    <Typography className={classes.name}>{ele.firstname + ' ' + ele.lastname}</Typography>
                                                 </Box>
                                             </TableCell>
                                             <TableCell>{ele.email}</TableCell>

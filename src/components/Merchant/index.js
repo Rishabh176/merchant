@@ -5,11 +5,12 @@ import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import { BASE_URL } from '../../utils/constant';
 import Loader from '../../features/Loader';
-// import { useStyles } from "./styles";
+import { useStyles } from "./styles";
 
 const Merchant = memo((props) => {
 
     const id = props.match.params.id;  //extracting id from URL
+    const classes = useStyles();
 
     /**  useState hooks */
     const [loading, setLoading] = useState(true);
@@ -41,12 +42,12 @@ const Merchant = memo((props) => {
     }
     else {
         return (
-            <Box>
-                <Paper>
+            <Box className={classes.container}>
+                <Box className={classes.top}>
                     <Box>
-                        <img src={merchantData?.avatarUrl} />
+                        <img src={merchantData?.avatarUrl} className={classes.image} />
                     </Box>
-                    <Box>
+                    <Box className={classes.merchantInfo}>
                         {
                             merchantData?.hasPremium === true ? 
                             <Chip 
@@ -54,20 +55,21 @@ const Merchant = memo((props) => {
                                 icon={<Star />}
                                 label="Premium"
                                 color="secondary"
+                                className={classes.root}
                             /> : null
                         }
-                        <Typography>{merchantData?.firstname + ' ' + merchantData?.lastname}</Typography>
-                        <Typography>{merchantData?.email}</Typography>
-                        <Typography>{merchantData?.phone}</Typography>
+                        <Typography variant="h5" className={classes.padding}>{merchantData?.firstname + ' ' + merchantData?.lastname}</Typography>
+                        <Typography variant="h6" className={classes.padding}>{merchantData?.email}</Typography>
+                        <Typography variant="h6" className={classes.padding}>{merchantData?.phone}</Typography>
                     </Box>             
-                </Paper>
-                <Paper>
+                </Box>
+                <Paper className={classes.bottom}>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Car</TableCell>
-                                <TableCell>Amount</TableCell>
-                                <TableCell>Created</TableCell>
+                                <TableCell className={classes.rowTitle}>Car</TableCell>
+                                <TableCell className={classes.rowTitle}>Amount</TableCell>
+                                <TableCell className={classes.rowTitle}>Created</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -77,9 +79,9 @@ const Merchant = memo((props) => {
                                     var formattedTime = date.toLocaleString();
                                     return (
                                         <TableRow key={bid.id}>
-                                            <TableCell>{bid.carTitle}</TableCell>
-                                            <TableCell>{bid.amount}</TableCell>
-                                            <TableCell>{formattedTime}</TableCell>
+                                            <TableCell className={classes.cell}>{bid.carTitle}</TableCell>
+                                            <TableCell className={classes.cell}>{bid.amount}</TableCell>
+                                            <TableCell className={classes.cell}>{formattedTime}</TableCell>
                                         </TableRow>
                                     );
                                 }) 
