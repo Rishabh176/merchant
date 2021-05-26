@@ -1,7 +1,8 @@
 import React, { memo, useEffect, useState} from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { Box, Paper, Table, TableHead, TableBody, TableCell, TableRow, Typography, Avatar, TablePagination } from '@material-ui/core';
+import { Box, Paper, Table, TableHead, TableBody, TableCell, TableRow, Typography, Avatar, TablePagination, IconButton } from '@material-ui/core';
+import { ToggleOff, ToggleOn } from '@material-ui/icons';
 import { BASE_URL } from '../../utils/constant';
 import Loader from '../../features/Loader';
 // import { useStyles } from "./styles";
@@ -15,6 +16,7 @@ const Home = memo(() => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [toggle, setToggle] = useState(true);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -50,6 +52,14 @@ const Home = memo(() => {
     else {
         return (
             <Box>
+                <Box mb={5} mt={3}>
+                    <Typography>{toggle ? "Max Bid" : "Min Bid" }</Typography>
+                    <IconButton onClick={() => setToggle(!toggle)}>
+                        {
+                            toggle ? <ToggleOn /> : <ToggleOff />
+                        }
+                    </IconButton>
+                </Box>
                 <Paper>
                     <Table>
                         <TableHead>
@@ -78,7 +88,7 @@ const Home = memo(() => {
                                             <TableCell>{ele.email}</TableCell>
                                             <TableCell>{ele.phone}</TableCell>
                                             <TableCell>{ele.hasPremium === true ? "YES" : "NO"}</TableCell>
-                                            <TableCell>{ maxBid }</TableCell>
+                                            <TableCell>{toggle ? maxBid : minBid}</TableCell>
                                         </TableRow>
                                     );
                                 })
