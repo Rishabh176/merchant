@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState} from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../utils/constant';
+import Loader from '../../features/Loader';
 // import { useStyles } from "./styles";
 
 const Home = memo(() => {
@@ -29,7 +30,7 @@ const Home = memo(() => {
     console.log("data--->", data);
 
     if (loading) {
-        return null;
+        return <Loader />;
     }
     else {
         return (

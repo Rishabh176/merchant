@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import { BASE_URL } from '../../utils/constant';
+import Loader from '../../features/Loader';
 // import { useStyles } from "./styles";
 
 const Merchant = memo((props) => {
@@ -30,9 +31,9 @@ const Merchant = memo((props) => {
     }
 
     console.log("data--->", merchantData);
-    
+
     if (loading) {
-        return null;
+        return <Loader />;
     }
     else {
         return (
